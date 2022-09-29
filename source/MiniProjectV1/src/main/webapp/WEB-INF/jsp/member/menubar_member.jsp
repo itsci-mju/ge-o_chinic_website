@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-      <%@ page import="models.* "%>
-    <%
+      <%@ page import="org.itsci.utils.models.* "%>
+<%@ page import="org.itsci.models.Person" %>
+<%@ page import="org.itsci.models.Logins" %>
+<%
     	Logins l = (Logins) session.getAttribute("member");
     	Person p = (Person) session.getAttribute("memberp");
     %>

@@ -1,6 +1,4 @@
-package utils;
-
-
+package org.itsci.utils;
 
 import java.util.Properties;
 
@@ -8,15 +6,25 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
-import models.*;
+import org.itsci.models.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-
+@org.springframework.context.annotation.Configuration
+@EnableTransactionManagement
+@PropertySource("classpath:persistence.properties")
 public class HibernateConnection {
+
+	@Autowired
+	private Environment env;
+
 	public static SessionFactory sessionFactory;
 	static String url = "jdbc:mysql://localhost:3306/mini_project?characterEncoding=UTF-8";
 	static String uname = "root";
 	static String pwd = "1234";
-	
+
 	public static SessionFactory  doHibernateConnection() {
 		Properties database = new Properties();
 		

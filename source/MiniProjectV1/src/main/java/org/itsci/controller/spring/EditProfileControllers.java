@@ -1,22 +1,21 @@
-package controller.spring;
+package org.itsci.controller.spring;
 
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.itsci.utils.Manager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import models.Logins;
-import models.Person;
-import utils.Manager;
+import org.itsci.models.Logins;
+import org.itsci.models.Person;
 
 
 @Controller

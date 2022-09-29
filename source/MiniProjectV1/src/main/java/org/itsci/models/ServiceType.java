@@ -1,4 +1,4 @@
-package models;
+package org.itsci.models;
 
 import java.util.List;
 import java.util.Vector;

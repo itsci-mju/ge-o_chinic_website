@@ -1,11 +1,11 @@
-package utils;
+package org.itsci.utils;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.query.Query;
 
-import models.*;
+import org.itsci.models.Logins;
+import org.itsci.models.Person;
 
 public class Manager {
 	public int AddorUpdatePerson(Person person) {

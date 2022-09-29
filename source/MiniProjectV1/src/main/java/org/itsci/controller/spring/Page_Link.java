@@ -1,4 +1,4 @@
-package controller.spring;
+package org.itsci.controller.spring;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

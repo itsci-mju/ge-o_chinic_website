@@ -1,4 +1,4 @@
-package utils;
+package org.itsci.utils;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 

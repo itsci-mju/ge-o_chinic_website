@@ -1,11 +1,11 @@
-package utils;
+package org.itsci.utils;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import models.Logins;
-import models.Person;
+import org.itsci.models.Logins;
+import org.itsci.models.Person;
 
 
 public class Runs {
