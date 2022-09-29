@@ -4,24 +4,26 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-
 import org.itsci.models.Logins;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 public class LoginManager {
-	public LoginManager() {
+
+    @Autowired
+    SessionFactory sessionFactory;
+
+    public LoginManager() {
 		// TODO Auto-generated constructor stub
 	}
 
+    @Transactional
 	public Logins Login(Logins u) {
 		Logins user = null;
 		try {
-            SessionFactory sessionFactory = HibernateConnection.doHibernateConnection();
-            Session session = sessionFactory.openSession();
-            Transaction t = session.beginTransaction();
+            Session session = sessionFactory.getCurrentSession();
             user = (Logins) session.createQuery("From Logins where email= '" + u.getEmail() + 
             		"' and password = '" + u.getPassword() + "'").uniqueResult();
-            t.commit();
-            session.close();
             return user ;
         } catch (Exception e) {
             e.printStackTrace();

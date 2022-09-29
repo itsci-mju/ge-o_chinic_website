@@ -6,18 +6,20 @@ import org.hibernate.Transaction;
 
 import org.itsci.models.Logins;
 import org.itsci.models.Person;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 public class Manager {
+
+	@Autowired
+	SessionFactory sessionFactory;
+
+	@Transactional
 	public int AddorUpdatePerson(Person person) {
 		int Resutl = 0;
 		 try {
-	            SessionFactory sessionFactory = HibernateConnection.doHibernateConnection();
-	            Session session = sessionFactory.openSession();
-	            Transaction t = session.beginTransaction();
+	            Session session = sessionFactory.getCurrentSession();
 	            session.saveOrUpdate(person);
-	              
-	            t.commit();
-	            session.close();
 	            Resutl = 1;
 	        } catch (Exception e) {
 	            e.printStackTrace();
@@ -25,16 +27,13 @@ public class Manager {
 	        }
 	        return Resutl;
 	}
-	
+
+	@Transactional
 	public int AddorUpdateLogins(Logins logins) {
 		int Resutl = 0;
 		 try {
-	            SessionFactory sessionFactory = HibernateConnection.doHibernateConnection();
-	            Session session = sessionFactory.openSession();
-	            Transaction t = session.beginTransaction();
+	            Session session = sessionFactory.getCurrentSession();
 	            session.saveOrUpdate(logins);
-	              
-	            t.commit();
 	            session.close();
 	            Resutl = 1;
 	        } catch (Exception e) {
@@ -43,15 +42,13 @@ public class Manager {
 	        }
 	        return Resutl;
 	}
-	
+
+	@Transactional
 	public Person getPerson(int Id) {
 		Person Resutl = null;
-		SessionFactory sessionFactory = HibernateConnection.doHibernateConnection();
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
 		 try {
 	            Resutl = session.get(Person.class, Id);
-	              
-	                 
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	            Resutl = null;
@@ -59,11 +56,11 @@ public class Manager {
 		 	session.close(); 
 	        return Resutl;
 	}
-	
+
+	@Transactional
 	public Person getPerson(String Id) {
 		Person Resutl = null;
-		SessionFactory sessionFactory = HibernateConnection.doHibernateConnection();
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
 		 try {
 			 //เรียกทั้งคลาส
 	            Resutl = (Person) session.createQuery("From Person where logins.email = '"+ Id +"'").uniqueResult();
@@ -79,12 +76,12 @@ public class Manager {
 		 	session.close(); 
 	        return Resutl;
 	}
-	
+
+	@Transactional
 	public Logins getLogins(String Id) {
 		Logins Resutl = null;
 		 try {
-	            SessionFactory sessionFactory = HibernateConnection.doHibernateConnection();
-	            Session session = sessionFactory.openSession();
+	            Session session = sessionFactory.getCurrentSession();
 	            Transaction t = session.beginTransaction();
 	            Resutl = session.get(Logins.class, Id);
 	              
@@ -96,7 +93,4 @@ public class Manager {
 	        }
 	        return Resutl;
 	}
-
-
-
 }
