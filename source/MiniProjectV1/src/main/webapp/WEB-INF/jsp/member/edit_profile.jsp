@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="org.itsci.utils.models.* "%>
+        <!-- <%@ page import="org.itsci.utils.models.* "%> -->  
 <%@ page import="org.itsci.models.Person" %>
 <%@ page import="org.itsci.models.Logins" %>
 <%
@@ -97,15 +97,17 @@
             <div class="left-content">
             	<!-- ***** Input Register Start ***** -->
 				<form action="${pageContext.request.contextPath}/open_Registers_page" method="POST">
-    				ชื่อ - นามสกุล : <input type="text" name="name" value=""><br>
-   					รหัสผ่าน : <input type="password" name="pwd" value=""><br>
-				    วันเกิด : <input type="date" name="birthday" value=""><br>
-					เพศ : <input type="radio" name="err_gender" value="">
-					ชื่อเล่น : <input type="text" name="nickname" value=""><br>
-				    รหัสประจำตัวประชาชน : <input type="text" name="idcard" value=""><br>
-				    ที่อยู่ : <input type="text" name="address" value=""><br>
-				    เบอร์โทรศัพท์ : <input type="text" name="phone" value=""><br>
-				    E-Mail : <input type="text" name="email" value=""><br>
+    				ชื่อ - นามสกุล : <input type="text" name="name" value="${person.full_name}"><br>
+   					รหัสผ่าน : <input type="text" name="pwd" value="${person.logins.password}"><br>
+				    วันเกิด : <input type="date" name="birthday" value="${person.birthday}"><br>
+				    เพศ : <input type="radio" name="err_gender" value="0">ชาย <input type="radio" name="err_gender" value="1">หญิง<br>
+					ชื่อเล่น : <input type="text" name="nickname" value="${person.nickname}"><br>
+				    รหัสประจำตัวประชาชน : <input type="text" name="idcard" value="${person.id_card}"><br>
+				    ที่อยู่ : <input type="text" name="address" value="${person.address}"><br>
+				    เบอร์โทรศัพท์ : <input type="text" name="phone" value="${person.phone_number}"><br>
+				    E-Mail : <input type="text" name="email" value="${person.logins.email}"><br>
+				    โรคประจำตัว : <input type="text" name="congenital_disorder" value="${person.congenital_disorder}"><br> 
+				    แพ้ยา : <input type="text" name="drug_allergy" value="${person.drug_allergy}"><br>
 
 					<button type="submit" value="submit" onclick="validate(frm)">ยืนยัน</button>
 					<button type="reset" value="reset" >ยกเลิก</button>

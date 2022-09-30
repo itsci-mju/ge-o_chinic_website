@@ -21,7 +21,7 @@ public class LoginController {
 	@RequestMapping(value="/login" , method=RequestMethod.POST)
 	public ModelAndView loginPage(HttpServletRequest request ) {
 		HttpSession session = request.getSession();
-		ModelAndView mav = new ModelAndView("Logins");
+		ModelAndView mav = new ModelAndView("Login_page");
 		
 		String email = request.getParameter("email");
 		String pass = request.getParameter("pwd");
