@@ -5,44 +5,20 @@ import org.hibernate.SessionFactory;
 
 import org.itsci.models.Logins;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Service
 public class LoginManager {
 
-//    @Autowired
-//    HibernateConnection sessionFactory;
-	@Autowired
-	SessionFactory sessionFactory;
-
-    public LoginManager() {
-		// TODO Auto-generated constructor stub
-	}
+    @Autowired
+    SessionFactory sessionFactory;
 
     @Transactional
-	public Logins Login(Logins u) {
-    	Logins user = null;
-
-            Session session = sessionFactory.getCurrentSession();
-            user = (Logins) session.createQuery("From Logins where email= '" + u.getEmail() + 
-            		"' and password = '" + u.getPassword() + "'").uniqueResult();
-            return user;
-        }
+    public Logins Login(Logins u) {
+        Session session = sessionFactory.getCurrentSession();
+        Logins user = (Logins) session.createQuery("From Logins where email= '" + u.getEmail() +
+                "' and password = '" + u.getPassword() + "'").uniqueResult();
+        return user;
+    }
 }
-
-
-
-
-
-
-//SessionFactory sessionFactory = HibernateConnection.doHibernateConnection();
-//Session session = sessionFactory.openSession();
-//Logins user = null;
-//try {		
-//    user = (Logins) session.createQuery("From Logins where email= '" + u.getEmail() + 
-//    		"' and password = '" + u.getPassword() + "'").uniqueResult();
-//    session.close();
-//} catch (Exception e) {
-//    e.printStackTrace();
-//    session.close();
-//}
-// return user ;

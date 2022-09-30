@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import org.itsci.utils.LoginManager;
 import org.itsci.models.Logins;
 import org.itsci.models.Person;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,9 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class LoginController {
 
-	public LoginController() {
-		// TODO Auto-generated constructor stub
-	}
+	@Autowired
+	private LoginManager loginManager;
 
 	@RequestMapping(value="/login" , method=RequestMethod.POST)
 	public ModelAndView loginPage(HttpServletRequest request ) {
@@ -27,8 +27,7 @@ public class LoginController {
 		String pass = request.getParameter("pwd");
 		
 		Logins log = new Logins(email,pass);
-		LoginManager m = new LoginManager();
-		log = m.Login(log);
+		log = loginManager.Login(log);
 		
 		if(log != null ) {
 			Person p =log.getPersons();
