@@ -7,7 +7,7 @@
 <script type="text/javascript"></script>
 <style type="text/css">
 .navbar-brand {
-    padding: 23.5px 20px;อุ่
+    padding: 23.5px 20px;
     font-size: 18px
 }
 

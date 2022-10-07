@@ -1,28 +1,21 @@
 package org.itsci.goclinic.model;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.TimeZone;
-import java.util.Vector;
+import org.hibernate.annotations.GenericGenerator;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+import javax.persistence.*;
 
 @Entity
 @Table( name = "person")
-public class Person {
+public class Person implements UserDetails {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id", nullable = false)
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@GenericGenerator(name = "increment", strategy = "increment")
 	private int person_id;
 	@Column(length = 100,nullable = false)
 	private String full_name;
@@ -42,18 +35,15 @@ public class Person {
 	private String congenital_disorder;
 	@Column(length = 50)
 	private String drug_allergy;
-	
 	@OneToMany(mappedBy="person")
 	private List<BuyService> list_buyservice = new Vector<>();
-	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "logins_FK",referencedColumnName  = "email", unique = true)
-	private Login logins;
-	
-	public Person() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	private Login login;
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private Set<Authority> authorities = new HashSet<>();
+
+	public Person() {}
 
 	public Person(String full_name, String nickname, Date birthday, String id_card,
 			String gender, String address, String phone_number, String congenital_disorder,
@@ -141,16 +131,15 @@ public class Person {
 	}
 
 	public Login getLogins() {
-		return logins;
+		return login;
 	}
 
-	public void setLogins(Login logins) {
-		this.logins = logins;
+	public void setLogins(Login login) {
+		this.login = login;
 	}
 	
-	public Person(Login email) {
-		super();
-		this.logins = email;
+	public Person(Login login) {
+		this.login = login;
 	}
 	
 //	public int getAge() {
@@ -189,5 +178,39 @@ public class Person {
         System.out.println(Format.format(birthday));
 		return Format.format(birthday);
 	}
-	
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return authorities;
+	}
+
+	@Override
+	public String getPassword() {
+		return login.getPassword();
+	}
+
+	@Override
+	public String getUsername() {
+		return login.getEmail();
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
 }

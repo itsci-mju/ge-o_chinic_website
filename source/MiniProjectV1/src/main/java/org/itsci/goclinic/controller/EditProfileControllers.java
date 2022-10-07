@@ -31,7 +31,7 @@ public class EditProfileControllers {
 		String Id = request.getParameter("id");
 		
 		Login log = m.getLogins(Id);
-		Person p = log.getPersons();
+		Person p = log.getPerson();
 		
 		mav.addObject("logins",log);
 		mav.addObject("person",p);

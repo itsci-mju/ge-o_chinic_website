@@ -10,10 +10,11 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class Page_Link {
 
-	public Page_Link() {
-		super();
-		// TODO Auto-generated constructor stub
+	@RequestMapping("/")
+	public String home() {
+		return "index";
 	}
+
 	//**************Customer page**************
 	@RequestMapping(value="/open_home_customer_page", method=RequestMethod.GET)
 	public ModelAndView LondHomeCustomers(HttpServletRequest request) {

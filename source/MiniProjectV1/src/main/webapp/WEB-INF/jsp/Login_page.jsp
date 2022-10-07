@@ -33,12 +33,12 @@
     <div class="form-container">
 
         <div class="form-inner">
-            <form:form action="${pageContext.request.contextPath}/login" modelAttribute="login" method="POST" cssClass="login">
+            <form:form action="${pageContext.request.contextPath}/authenticate" method="POST" cssClass="login">
                 <div class="field">
-                    <form:input type="text" path="email" placeholder="Email" required="true"/>
+                    <input type="text" name="username" placeholder="Email" required="true"/>
                 </div>
                 <div class="field">
-                    <form:input type="password" path="password" placeholder="Password" required="true"/>
+                    <input type="password" name="password" placeholder="Password" required="true"/>
                 </div>
                 <%
                 %>

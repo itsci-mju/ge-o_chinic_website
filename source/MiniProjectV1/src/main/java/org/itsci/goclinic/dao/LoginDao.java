@@ -1,7 +1,7 @@
 package org.itsci.goclinic.dao;
 
-import org.itsci.goclinic.model.Login;
+import org.springframework.security.core.userdetails.UserDetails;
 
 public interface LoginDao {
-    Login Login(Login u);
+    UserDetails loadUserByUsername(String email);
 }

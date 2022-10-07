@@ -1,5 +1,7 @@
 package org.itsci.goclinic.model;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -13,11 +15,11 @@ public class Login {
 	private String email;
 	@Column(length = 16,nullable = false)
 	private String password;
-	@Column(length = 2,nullable = false)
+	@Column(length = 128,nullable = false)
 	private String type;
 	
-	@OneToOne(mappedBy="logins")
-	private Person persons;
+	@OneToOne(mappedBy="login")
+	private Person person;
 	
 	public Login() {}
 
@@ -53,11 +55,11 @@ public class Login {
 		this.password = password;
 	}
 
-	public Person getPersons() {
-		return persons;
+	public Person getPerson() {
+		return person;
 	}
 
-	public void setPersons(Person persons) {
-		this.persons = persons;
+	public void setPerson(Person person) {
+		this.person = person;
 	}
 }
