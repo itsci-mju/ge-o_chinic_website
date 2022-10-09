@@ -46,14 +46,7 @@ public class Page_Link {
 
 		return mav;
 	}
-	
-	@RequestMapping(value="/open_services_c_page", method=RequestMethod.GET)
-	public ModelAndView Londservices_c(HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		ModelAndView mav = new ModelAndView("service_customer");
 
-		return mav;
-	}
 
 	//**************Member page**************
 	@RequestMapping(value="/open_home_member_page", method=RequestMethod.GET)

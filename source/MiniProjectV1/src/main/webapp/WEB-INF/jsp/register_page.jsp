@@ -1,13 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>List Staff</title>
-<link rel="stylesheet"
+<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+
+    <title>Register Page</title>
+    <link rel="stylesheet"
     href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
     crossorigin="anonymous">
@@ -22,14 +25,24 @@
     src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
-<script src="<%=request.getContextPath()%>/css/sorttable.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/css/inputnumbers.js" type="text/javascript"></script>
-
-<style type="text/css">
+<script>
+    function message() {
+      var message = "${message}";
+      if(message!=""){
+          alert(message);
+      }
+    }
+</script>
+    <style type="text/css">
 @import url('https://fonts.googleapis.com/css2?family=Prompt:ital,wght@1,500;1,900&family=Roboto:ital,wght@1,900&display=swap');
 </style>
-<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+<link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
+
+<script src="https://kit.fontawesome.com/8e4d971ffd.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
      
@@ -39,8 +52,9 @@
     <link rel="stylesheet" href="css/owl.css">
    
 </head>
-<body>
-<jsp:include page="../menubar_admin.jsp" />
+<body onclick="message()">
+<!-- Navbar -->
+<jsp:include page="menubar_general.jsp" />
  <!-- ***** Preloader Start ***** -->
     <div id="preloader">
         <div class="jumper">
@@ -63,37 +77,49 @@
         </div>
       </div>
     </div>
-	<table class="table table-bordered searchable sortable table.sortable " border="1">
-					<thead class="text-center font-weight-bold">
-					<tr>
-						<th scope="col">Service ID</th>
-						<th scope="col">ชื่อบริการ</th>
-						<th scope="col">รายละเอียดบริการ</th>
-						<th scope="col">ราคา</th>
-						<th scope="col">รูป</th>
-						<th scope="col">สถานะ</th>
-						<th scope="col">แก้ไข</th>
-						<th scope="col">ลบ</th>
-					</tr>
-					</thead>
-					<tbody>
-						
-						<c:forEach items="${ListServices}" var="Services">
-						<tr>
-							<td>${Services.service_id}</td>
-							<td>${Services.serviceName}</td>
-							<td>${Services.serviceDetail}</td>
-							<td>${Services.price}</td>
-							<td>${Services.image}</td>
-							<td>${Services.serviceStatus}</td>
-							<td><a href="open_edit_staff_page?id=${Services.service_id}"><button type="submit" class="btn btn-primary"> <ion-icon name="create"></ion-icon></button></a></td>
-							<td><a href="delete_staff?id=${Services.service_id}"><button type="submit" class="btn btn-primary" onclick="return confirm('คุณต้องการดำเนินการต่อหรือไม่?')"> <ion-icon name="trash"></ion-icon></button></a></td>
-						</tr>
-						</c:forEach>
-						
-					</tbody>
-				</table>
-				<!-- Bootstrap core JavaScript -->
+    
+    <div class="best-features about-features">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-heading">
+              <h2>Register</h2>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="left-content">
+            	<!-- ***** Input Register Start ***** -->
+				<form action="${pageContext.request.contextPath}/open_Registers_page" method="POST">
+    				ชื่อ - นามสกุล : <input type="text" name="name"><br>
+   					รหัสผ่าน : <input type="password" name="pwd"><br>
+				    วันเกิด : <input type="date" name="birthday"><br>
+					เพศ : <input type="radio" name="err_gender" value="0">ชาย<input type="radio" name="err_gender" value="1">หญิง<br>
+					ชื่อเล่น : <input type="text" name="nickname"><br>
+				    รหัสประจำตัวประชาชน : <input type="text" name="idcard"><br>
+				    ที่อยู่ : <input type="text" name="address"><br>
+				    เบอร์โทรศัพท์ : <input type="text" name="phone"><br>
+				    E-Mail : <input type="text" name="email"><br>
+				    โรคประจำตัว : <input type="text" name="congenital_disorder"><br> 
+				    แพ้ยา : <input type="text" name="drug_allergy"><br>
+
+					<button type="submit" value="submit" onclick="validate(frm)">ลงทะเบียน</button>
+					<button type="reset" value="reset" >ยกเลิก</button>
+					</form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+	
+	<!-- ***** Input Register End ***** -->
+
+    <jsp:include page="footer.jsp" />
+    
+  
+
+  
+    <!-- Bootstrap core JavaScript -->
     <script src="jquery/jquery.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
 
@@ -115,5 +141,6 @@
           t.style.color='#fff';
           }
       }
+    </script>
 </body>
 </html>

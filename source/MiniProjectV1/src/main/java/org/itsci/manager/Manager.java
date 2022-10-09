@@ -151,4 +151,18 @@ public class Manager {
 	        }
 	        return Resutl;
 	}
+	//**************delete staff**********************
+	@Transactional
+	public int deleteStaff(Person person) {
+		int Resutl = 0;
+		 try {
+	            Session session = sessionFactory.getCurrentSession();
+	            session.delete(person);
+	            Resutl = 1;
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            Resutl = 0;  
+	        }
+	        return Resutl;
+	}
 }
