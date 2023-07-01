@@ -1,0 +1,11 @@
+@charset "ISO-8859-1";
+html, body {
+    background-color: lightgray;
+    margin: 0;
+    padding: 0;
+}
+
+.backgrounds_html{
+	max-width: 700px;
+    margin: auto;
+}
